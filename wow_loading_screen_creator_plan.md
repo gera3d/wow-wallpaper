@@ -1,16 +1,16 @@
-# Project Plan: Turtle WoW Custom Loading Screen Creator (GitHub Edition)
+# Project Plan: WoW Loading Screen Creator (GitHub Edition)
 
 ## 1. Project Overview
-Development of a GitHub Pages-hosted web application that allows Turtle WoW players to create, customize, and share loading screen packs for Vanilla WoW 1.12.1. The application will leverage GitHub's infrastructure for hosting, storage, and user authentication.
+Development of a GitHub Pages-hosted web application that allows World of Warcraft private server players to create, customize, and share loading screen packs for Vanilla WoW 1.12.1. The application will leverage GitHub's infrastructure for hosting, storage, and user authentication.
 
 ## 2. Requirements and Features
 
 ### Core Features
 - GitHub OAuth authentication for saving and managing loading screen packs
-- Loading screen template library with Turtle WoW-themed backgrounds
+- Loading screen template library with fantasy-themed backgrounds
 - Client-side image upload functionality for custom backgrounds
 - Preview functionality showing how screens will look in-game
-- Pack export in the correct format for Turtle WoW client
+- Pack export in the correct format for WoW private server clients
 - Community sharing through GitHub repositories and discussions
 
 ### Technical Requirements
@@ -73,7 +73,7 @@ Development of a GitHub Pages-hosted web application that allows Turtle WoW play
   - LOADINGSCREEN_KALIMDOR
   - LOADINGSCREEN_LOAD
   - LOADINGSCREEN_LOGIN
-  - (Plus additional Turtle WoW-specific screens)
+  - (Plus additional private server-specific screens)
 
 ### User Workflow
 1. User authenticates with GitHub OAuth
@@ -88,7 +88,7 @@ Development of a GitHub Pages-hosted web application that allows Turtle WoW play
 - Unit testing for all core functionality using Jest
 - GitHub Actions for automated testing on each commit
 - Browser compatibility testing with focus on WebAssembly support
-- User acceptance testing with Turtle WoW players
+- User acceptance testing with private server players
 - Performance testing for client-side image processing operations
 
 ## 7. Deployment Plan
@@ -113,6 +113,6 @@ Development of a GitHub Pages-hosted web application that allows Turtle WoW play
 ## 10. Resources and References
 - [GitHub Pages Documentation](https://docs.github.com/en/pages)
 - [GitHub OAuth Documentation](https://docs.github.com/en/developers/apps/building-oauth-apps)
-- [Turtle WoW Official Website](https://turtle-wow.org/)
+- [WoW Development Wiki](https://wowdev.wiki/)
 - [WoW 1.12.1 Client File Specifications](https://wowdev.wiki/BLP)
-- [Community Discord for Feedback](https://discord.gg/turtlewow)
+- [Private Server Community Resources](https://wowdev.wiki/)

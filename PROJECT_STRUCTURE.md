@@ -1,9 +1,9 @@
-# Turtle WoW Loading Screen Creator - Project Structure
+# WoW Loading Screen Creator - Project Structure
 
 ## Proposed Directory Structure
 
 ```
-turtle-wow-loading-screen-creator/
+wow-loading-screen-creator/
 ├── public/
 │   ├── index.html
 │   ├── favicon.ico

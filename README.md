@@ -39,7 +39,7 @@ See [PROJECT_STRUCTURE.md](./PROJECT_STRUCTURE.md) for detailed information abou
 
 ## 📋 Development Plan
 
-See [turtle_wow_loading_screen_creator_plan.md](./turtle_wow_loading_screen_creator_plan.md) for the complete project roadmap and requirements.
+See [wow_loading_screen_creator_plan.md](./wow_loading_screen_creator_plan.md) for the complete project roadmap and requirements.
 
 ## 🤝 Contributing
 
