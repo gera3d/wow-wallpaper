@@ -1,6 +1,6 @@
-# Turtle WoW Loading Screen Creator
+# WoW Loading Screen Creator
 
-A web-based tool for creating custom loading screen packs for Turtle WoW (Vanilla 1.12.1). Built with React, TypeScript, and hosted on GitHub Pages.
+A web-based tool for creating custom loading screen packs for World of Warcraft private servers (Vanilla 1.12.1). Built with React, TypeScript, and hosted on GitHub Pages.
 
 ## 🎮 Features
 
@@ -14,7 +14,7 @@ A web-based tool for creating custom loading screen packs for Turtle WoW (Vanill
 ## 🚀 Getting Started
 
 This project is currently in development. The live version will be available at:
-`https://[username].github.io/turtle-wow-loading-screen-creator`
+`https://[username].github.io/wow-loading-screen-creator`
 
 ### For Developers
 
@@ -51,10 +51,9 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 🔗 Links
 
-- [Turtle WoW Official Website](https://turtle-wow.org/)
-- [Turtle WoW Community Discord](https://discord.gg/turtlewow)
 - [WoW Development Wiki](https://wowdev.wiki/)
+- [Private Server Community Resources](https://wowdev.wiki/)
 
 ## ⚠️ Disclaimer
 
-This tool is created by and for the Turtle WoW community. It is not affiliated with Blizzard Entertainment. World of Warcraft is a trademark of Blizzard Entertainment.
+This tool is created for World of Warcraft private server communities. It is not affiliated with Blizzard Entertainment. World of Warcraft is a trademark of Blizzard Entertainment.
