@@ -75,7 +75,7 @@ const GitHubLogin: React.FC = () => {
         Login with GitHub
       </Button>
       
-      {/* Development Token Input - Available until OAuth is configured */}
+      {/* Token Input - Available for development and fallback */}
       {(process.env.NODE_ENV === 'development' || !import.meta.env.VITE_GITHUB_CLIENT_ID) && (
         <div className="relative">
           <Button 
