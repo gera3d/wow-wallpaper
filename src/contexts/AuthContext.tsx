@@ -17,7 +17,6 @@ interface AuthContextType {
   login: () => void;
   logout: () => void;
   token: string | null;
-  handleOAuthCallback: (code: string, state: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -28,11 +27,11 @@ interface AuthProviderProps {
 
 // GitHub OAuth App configuration
 const CLIENT_ID = import.meta.env.VITE_GITHUB_CLIENT_ID;
-const REDIRECT_URI = import.meta.env.VITE_GITHUB_REDIRECT_URI || `${window.location.origin}/wow-wallpaper/auth/callback`;
+const REDIRECT_URI = import.meta.env.VITE_GITHUB_REDIRECT_URI || `${import.meta.env.VITE_BASE_URL || window.location.origin}/wow-wallpaper/auth/callback`;
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<GitHubUser | null>(null);
-  const [token, setToken] = useState<string | null>(localStorage.getItem('github_token'));
+  const [token, setToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const isAuthenticated = !!user && !!token;
@@ -40,58 +39,50 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   // Initialize auth state on app load
   useEffect(() => {
     const initAuth = async () => {
-      const savedToken = localStorage.getItem('github_token');
-      if (savedToken) {
-        try {
-          const userData = await fetchGitHubUser(savedToken);
-          setUser(userData);
+      try {
+        const savedToken = localStorage.getItem('github_token');
+        if (savedToken) {
           setToken(savedToken);
-        } catch (error) {
-          console.error('Failed to validate saved token:', error);
-          localStorage.removeItem('github_token');
-          setToken(null);
+          try {
+            const userData = await fetchGitHubUser(savedToken);
+            setUser(userData);
+          } catch (error) {
+            console.error('Failed to validate saved token:', error);
+            localStorage.removeItem('github_token');
+            setToken(null);
+            setUser(null);
+          }
         }
+      } catch (error) {
+        console.error('Failed to initialize auth:', error);
+      } finally {
+        setIsLoading(false);
       }
-      setIsLoading(false);
     };
 
     initAuth();
-  }, []);
+  }, []); // Run only once on mount
 
-  // Handle OAuth callback
+  // Handle OAuth callback - run only once on mount
   useEffect(() => {
-    const handleCallback = async () => {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get('code');
-      const state = urlParams.get('state');
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    const state = urlParams.get('state');
+    
+    if (code && state && window.location.pathname.includes('/auth/callback')) {
+      // Clear the callback URL immediately to prevent infinite loops
+      window.history.replaceState({}, document.title, '/wow-wallpaper/');
       
-      if (code && state && window.location.pathname.includes('/auth/callback')) {
-        setIsLoading(true);
-        try {
-          // In a real app, you'd exchange the code for a token via your backend
-          // For now, we'll use GitHub's device flow or direct token approach
-          console.log('OAuth code received:', code);
-          
-          // Clear the callback URL
-          window.history.replaceState({}, document.title, '/wow-wallpaper/');
-          
-        } catch (error) {
-          console.error('OAuth callback error:', error);
-        } finally {
-          setIsLoading(false);
-        }
-      }
-    };
-
-    handleCallback();
-  }, []);
+      // In a real app, you'd exchange the code for a token via your backend
+      console.log('OAuth code received:', code);
+    }
+  }, []); // Empty dependency array - run only once on mount
 
   const login = () => {
     if (!CLIENT_ID) {
       console.error('GitHub Client ID not configured. Please set VITE_GITHUB_CLIENT_ID environment variable.');
-      console.log('Available env vars:', Object.keys(import.meta.env).filter(key => key.startsWith('VITE_')));
       // For now, just log the error - users can still use development token method
-      alert(`OAuth is not configured. CLIENT_ID: "${CLIENT_ID}". Use the "Dev" button for token-based login, or contact the administrator to set up OAuth.`);
+      alert('OAuth is not configured. Use the "Dev" button for token-based login, or contact the administrator to set up OAuth.');
       return;
     }
 
@@ -127,26 +118,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
-  // Handle OAuth callback - exchange code for token
-  const handleOAuthCallback = async (code: string, state: string) => {
-    try {
-      setIsLoading(true);
-      
-      console.log('OAuth callback received:', { code, state });
-      
-      // Since we can't expose the client secret in frontend code,
-      // and we don't have a backend server for this demo,
-      // we'll show a friendly message explaining how to get a token
-      throw new Error('OAuth_NEEDS_BACKEND');
-      
-    } catch (error) {
-      console.error('OAuth callback error:', error);
-      throw error;
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
   const value: AuthContextType = {
     user,
     isLoading,
@@ -154,7 +125,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     logout,
     token,
-    handleOAuthCallback,
   };
 
   // Expose setTokenManually for development
