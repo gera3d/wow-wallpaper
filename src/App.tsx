@@ -2,11 +2,12 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Shared/Header';
 import Footer from './components/Shared/Footer';
-import HomePage from './pages/Home';
-import EditorPage from './pages/Editor';
-import GalleryPage from './pages/Gallery';
-import MyPacksPage from './pages/MyPacks';
-import AboutPage from './pages/About';
+import Home from './pages/Home';
+import Editor from './pages/Editor';
+import Gallery from './pages/Gallery';
+import MyPacks from './pages/MyPacks';
+import About from './pages/About';
+import OAuthCallback from './components/Auth/OAuthCallback';
 
 function App() {
   return (
@@ -16,12 +17,12 @@ function App() {
         <Header />
         <main className="container mx-auto px-4 py-8">
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/editor" element={<EditorPage />} />
-            <Route path="/gallery" element={<GalleryPage />} />
-            <Route path="/my-packs" element={<MyPacksPage />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/auth/callback" element={<HomePage />} />
+            <Route path="/" element={<Home />} />
+            <Route path="/editor" element={<Editor />} />
+            <Route path="/gallery" element={<Gallery />} />
+            <Route path="/my-packs" element={<MyPacks />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/auth/callback" element={<OAuthCallback />} />
           </Routes>
         </main>
         <Footer />

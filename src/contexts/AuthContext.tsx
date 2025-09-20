@@ -17,6 +17,7 @@ interface AuthContextType {
   login: () => void;
   logout: () => void;
   token: string | null;
+  handleOAuthCallback: (code: string, state: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -126,6 +127,26 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  // Handle OAuth callback - exchange code for token
+  const handleOAuthCallback = async (code: string, state: string) => {
+    try {
+      setIsLoading(true);
+      
+      console.log('OAuth callback received:', { code, state });
+      
+      // Since we can't expose the client secret in frontend code,
+      // and we don't have a backend server for this demo,
+      // we'll show a friendly message explaining how to get a token
+      throw new Error('OAuth_NEEDS_BACKEND');
+      
+    } catch (error) {
+      console.error('OAuth callback error:', error);
+      throw error;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const value: AuthContextType = {
     user,
     isLoading,
@@ -133,6 +154,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     login,
     logout,
     token,
+    handleOAuthCallback,
   };
 
   // Expose setTokenManually for development
