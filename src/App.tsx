@@ -11,7 +11,7 @@ import AboutPage from './pages/About';
 function App() {
   return (
     <AuthProvider>
-      <Router>
+      <Router basename="/wow-wallpaper">
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
         <Header />
         <main className="container mx-auto px-4 py-8">
@@ -21,6 +21,7 @@ function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/my-packs" element={<MyPacksPage />} />
             <Route path="/about" element={<AboutPage />} />
+            <Route path="/auth/callback" element={<HomePage />} />
           </Routes>
         </main>
         <Footer />
