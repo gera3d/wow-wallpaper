@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext';
 import Header from './components/Shared/Header';
 import Footer from './components/Shared/Footer';
 import HomePage from './pages/Home';
@@ -9,7 +10,8 @@ import AboutPage from './pages/About';
 
 function App() {
   return (
-    <Router>
+    <AuthProvider>
+      <Router>
       <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800">
         <Header />
         <main className="container mx-auto px-4 py-8">
@@ -24,6 +26,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </AuthProvider>
   );
 }
 

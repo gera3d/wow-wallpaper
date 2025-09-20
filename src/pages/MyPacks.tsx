@@ -1,18 +1,80 @@
+import { Link } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import Button from '../components/Shared/Button';
+import Card from '../components/Shared/Card';
+import LoadingSpinner from '../components/Shared/LoadingSpinner';
+
 const MyPacksPage = () => {
+  const { isLoggedIn, isLoading, user } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="max-w-6xl mx-auto flex items-center justify-center py-16">
+        <div className="text-center">
+          <LoadingSpinner size="lg" className="mx-auto mb-4" />
+          <p className="text-gray-300">Loading your packs...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isLoggedIn) {
+    return (
+      <div className="max-w-4xl mx-auto">
+        <Card variant="wow" className="text-center">
+          <svg className="w-16 h-16 text-wow-gold mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <h2 className="text-2xl font-semibold text-white mb-4">Login Required</h2>
+          <p className="text-gray-300 mb-6">
+            Please login with GitHub to save, manage, and share your loading screen packs.
+          </p>
+          <div className="space-y-4">
+            <p className="text-sm text-gray-400">
+              With a GitHub account you can:
+            </p>
+            <ul className="text-left text-gray-300 space-y-2 max-w-md mx-auto">
+              <li className="flex items-center">
+                <span className="text-wow-gold mr-2">✓</span>
+                Save your loading screen creations
+              </li>
+              <li className="flex items-center">
+                <span className="text-wow-gold mr-2">✓</span>
+                Share packs with the community
+              </li>
+              <li className="flex items-center">
+                <span className="text-wow-gold mr-2">✓</span>
+                Access your packs from anywhere
+              </li>
+              <li className="flex items-center">
+                <span className="text-wow-gold mr-2">✓</span>
+                Browse and favorite community packs
+              </li>
+            </ul>
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-4xl font-bold text-white mb-4">My Packs</h1>
+          <h1 className="text-4xl font-bold text-white mb-4">
+            Welcome back, <span className="wow-gold-text">{user?.name || user?.login}</span>!
+          </h1>
           <p className="text-gray-300">Manage your loading screen creations</p>
         </div>
-        <button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors">
-          Create New Pack
-        </button>
+        <Link to="/editor">
+          <Button variant="wow-gold" size="lg">
+            Create New Pack
+          </Button>
+        </Link>
       </div>
 
-      {/* Login prompt for non-authenticated users */}
-      <div className="bg-slate-800/50 rounded-lg p-8 text-center mb-8">
+      {/* User's Packs - Placeholder for now */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
         <div className="max-w-md mx-auto">
           <svg className="w-16 h-16 text-gray-400 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
