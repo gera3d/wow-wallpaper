@@ -63,20 +63,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     initAuth();
   }, []); // Run only once on mount
 
-  // Handle OAuth callback - run only once on mount
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const code = urlParams.get('code');
-    const state = urlParams.get('state');
-    
-    if (code && state && window.location.pathname.includes('/auth/callback')) {
-      // Clear the callback URL immediately to prevent infinite loops
-      window.history.replaceState({}, document.title, '/wow-wallpaper/');
-      
-      // In a real app, you'd exchange the code for a token via your backend
-      console.log('OAuth code received:', code);
-    }
-  }, []); // Empty dependency array - run only once on mount
+
 
   const login = () => {
     if (!CLIENT_ID) {

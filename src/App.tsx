@@ -7,6 +7,7 @@ import EditorPage from './pages/Editor';
 import GalleryPage from './pages/Gallery';
 import MyPacksPage from './pages/MyPacks';
 import AboutPage from './pages/About';
+import OAuthCallback from './components/Auth/OAuthCallback';
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
             <Route path="/gallery" element={<GalleryPage />} />
             <Route path="/my-packs" element={<MyPacksPage />} />
             <Route path="/about" element={<AboutPage />} />
-            <Route path="/auth/callback" element={<HomePage />} />
+            <Route path="/auth/callback" element={<OAuthCallback />} />
           </Routes>
         </main>
         <Footer />
