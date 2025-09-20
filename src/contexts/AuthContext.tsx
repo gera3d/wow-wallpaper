@@ -88,7 +88,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const login = () => {
     if (!CLIENT_ID) {
       console.error('GitHub Client ID not configured. Please set VITE_GITHUB_CLIENT_ID environment variable.');
-      alert('GitHub authentication is not configured. Please contact the administrator.');
+      // For now, just log the error - users can still use development token method
+      alert('OAuth is not configured. Use the "Dev" button for token-based login, or contact the administrator to set up OAuth.');
       return;
     }
 

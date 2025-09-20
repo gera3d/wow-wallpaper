@@ -75,8 +75,8 @@ const GitHubLogin: React.FC = () => {
         Login with GitHub
       </Button>
       
-      {/* Development Token Input */}
-      {process.env.NODE_ENV === 'development' && (
+      {/* Development Token Input - Available until OAuth is configured */}
+      {(process.env.NODE_ENV === 'development' || !import.meta.env.VITE_GITHUB_CLIENT_ID) && (
         <div className="relative">
           <Button 
             variant="secondary" 
@@ -90,9 +90,12 @@ const GitHubLogin: React.FC = () => {
           {showTokenInput && (
             <div className="absolute top-full right-0 mt-2 p-4 bg-gray-800 border border-gray-600 rounded-lg shadow-lg z-50">
               <div className="w-80">
-                <h3 className="text-white font-semibold mb-2">Development Token</h3>
+                <h3 className="text-white font-semibold mb-2">GitHub Token Login</h3>
                 <p className="text-gray-400 text-sm mb-3">
-                  For testing, paste a GitHub Personal Access Token with 'user:email' and 'repo' scopes.
+                  Paste a GitHub Personal Access Token with 'user:email' scope. 
+                  <a href="https://github.com/settings/tokens" target="_blank" rel="noopener noreferrer" className="text-blue-400 hover:text-blue-300 ml-1">
+                    Create one here →
+                  </a>
                 </p>
                 <input
                   type="password"
